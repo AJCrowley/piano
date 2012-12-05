@@ -1,7 +1,7 @@
 {
 	"network":
 	{
-		"socketPort": 81
+		"socketPort": 8080
 	},
 	"sounds":
 	{
