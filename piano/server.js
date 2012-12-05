@@ -1,5 +1,6 @@
-var io = require("socket.io").listen(8081);;
+var conf = require("./package.json");
 var fs = require("fs");
+var io = require("socket.io").listen(conf.config.commport);
 
 var httpServer = require("http").createServer
 (
@@ -24,7 +25,7 @@ var httpServer = require("http").createServer
 			}
 		);
 	}
-).listen(8080);
+).listen(conf.config.webport);
 
 var piano = io.sockets.on
 (
