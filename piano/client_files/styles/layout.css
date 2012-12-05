@@ -1,0 +1,93 @@
+*
+{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+
+html
+{
+	height: 100%;
+}
+
+body
+{
+	font-family: helvetica, arial, sans-serif;
+	font-size: 10px;
+	background: rgb(50, 50, 50);
+	background: -webkit-radial-gradient(top left, circle cover, rgb(150, 150, 150), rgb(50, 50, 50));
+	background: -moz-radial-gradient(top left, circle cover, rgb(150, 150, 150), rgb(50, 50, 50));
+	background: -ms-radial-gradient(top left, circle cover, rgb(150, 150, 150), rgb(50, 50, 50));
+	background: -o-radial-gradient(top left, circle cover, rgb(150, 150, 150), rgb(50, 50, 50));
+	background: radial-gradient(top left, circle cover, rgb(150, 150, 150), rgb(50, 50, 50));
+	height: 100%;
+}
+
+:focus
+{
+	outline: none !important;
+}
+
+div#loading
+{
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	text-align: center;
+}
+
+div#loading div.content
+{
+	position: absolute;
+	width: 100%;
+	top: 45%;
+}
+
+div#loading span#loadText
+{
+	top: 50%;
+	left: 0%;
+	color: rgb(255, 255, 255);
+	font-size: 22px;
+	width: 100%;
+}
+
+div#loading span#loadBar
+{
+	display: block;
+	width: 200px;
+	height: 10px;
+	border: 1px rgba(255, 255, 255, 0.7) solid;
+	margin: 0px auto;
+	border-radius: 4px;
+}
+
+div#loading span#loadBar span
+{
+	position: relative;
+	display: block;
+	width: 0%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.7);
+	border-radius: 4px;
+}
+
+div#comms
+{
+	position: absolute;
+	width: 940px;
+	background-color: rgba(0, 0, 0, 0.7);
+	top: 260px;
+	bottom: 20px;
+	padding: 20px;
+	color: rgb(0, 200, 0);
+	font-family: "lucida console", terminal, system;
+	font-size: 12px;
+	border-radius: 8px;
+	overflow: auto;
+}
