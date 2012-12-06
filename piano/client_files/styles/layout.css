@@ -87,7 +87,7 @@ div#comms
 	padding: 20px;
 	color: rgb(0, 200, 0);
 	font-family: "lucida console", terminal, system;
-	font-size: 12px;
+	font-size: 10px;
 	border-radius: 8px;
 	overflow: auto;
 }
