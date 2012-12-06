@@ -1,6 +1,6 @@
 this.config = new function()
 {
-	this.instanceID = new Date().getTime();
+	this.instanceID = 0;
 	
 	// keep reference to self
 	var configRef = this;

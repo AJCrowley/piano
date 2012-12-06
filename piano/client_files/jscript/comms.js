@@ -12,7 +12,8 @@ var comms = new function()
 			"handshake",
 			function(data)
 			{
-				$("div#comms").prepend("connected: " + address + "<br />");
+				config.instanceID = data.id;
+				$("div#comms").prepend("connected: " + address + " sid: " + data.id + "<br />");
 				commsRef.socket.emit("handshake", {instanceID: config.instanceID});
 			}
 		);

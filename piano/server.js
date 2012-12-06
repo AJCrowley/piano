@@ -66,7 +66,6 @@ var piano = io.sockets.on
 			"sessionID",
 			function(error, id)
 			{
-				console.log("new session id: " + id);
 				socket.emit("handshake", {instanceID: id});
 			}
 		);
