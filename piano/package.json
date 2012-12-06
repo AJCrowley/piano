@@ -1,18 +1,30 @@
 {
-	"name": "piano-demo",
-	"subdomain": "ajcrowley.piano",
-	"scripts": {
+	"name": "piano",
+	"version": "0.0.1-15",
+	"author": "Kris McCann <kris@adeptmedia.ca>",
+	"description": "Simple Javascript/node/redis demo",
+	"bin": "../../redis/src/redis-server",
+	"scripts":
+	{
 		"start": "server.js"
 	},
-	"config": {
+	"config":
+	{
 		"webport": 80,
 		"commport": 8080
 	},
-	"dependencies": {
-		"socket.io": "~0.9.6"
+	"repository":
+	{
+		"type": "git",
+		"url": "https://github.com/AJCrowley/piano.git"
 	},
-	"version": "0.0.1-14",
-	"engines": {
+	"dependencies":
+	{
+		"socket.io": "~0.9.6",
+		"redis": "~2.6.7"
+	},
+	"engines":
+	{
 		"node": "0.8.x"
 	}
 }
