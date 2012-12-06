@@ -1,7 +1,7 @@
 var conf = require("./package.json"); // load config file
 var fs = require("fs");
 var redis = require("redis");
-//var client = redis.createClient();
+var client = redis.createClient();
 var io = require("socket.io").listen(conf.config.commport); // start socket.ui listening on port defined in config
 
 // start httpServer
