@@ -1,3 +1,7 @@
+// globally instance objects
+var config = new Config();
+var piano = new Piano();
+
 $(document).ready
 (
 	function($)

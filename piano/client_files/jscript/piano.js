@@ -1,5 +1,11 @@
-var piano = new function()
+var Piano = function()
 {
+	// keep reference to self
+	var pianoRef = this;
+
+	// store notes in an array
+	this.notes = {};
+
 	this.keyEvent = function(event)
 	{
 		// if char is one of our list at the bottom
@@ -31,7 +37,10 @@ var piano = new function()
 			config.settings.keymap,
 			function(key, value)
 			{
+				// put mapped key in key object
 				$(value).html(key);
+				// create audio element and add to notes object
+				pianoRef.notes[$(value).attr("id")] = $("<audio>", {preload: "auto"}).append($("<source>", {src: "sounds/" + $(value).attr("id") + ".ogg", type: "audio/ogg"})).append($("<source>", {src: "sounds/" + $(value).attr("id") + ".mp3", type: "audio/mpeg"}));
 			}
 		);
 		// assign click to keys
@@ -76,8 +85,21 @@ var piano = new function()
 							);
 						}
 						$(this).addClass("pressed");
-						// create audio element with appropriate sources and play
-						$("<audio>", {autoPlay: "autoplay"}).append($("<source>", {src: "sounds/" + $(this).attr("id") + ".ogg", type: "audio/ogg"})).append($("<source>", {src: "sounds/" + $(this).attr("id") + ".mp3", type: "audio/mpeg"}));
+						// clone audio object to container
+						$(this).append($(pianoRef.notes[$(this).attr("id")][0]).clone());
+						// get reference to cloned audio
+						var audio = $(this).children("audio")[$(this).children("audio").length - 1];
+						// listen for finished playing
+						$(audio).bind
+						(
+							"ended",
+							function()
+							{
+								// and remove from DOM
+								$(this).remove();
+							}
+						);
+						audio.play();
 						break;
 
 					case "released":

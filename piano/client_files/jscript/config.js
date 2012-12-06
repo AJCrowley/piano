@@ -1,4 +1,4 @@
-this.config = new function()
+var Config = function()
 {
 	this.instanceID = 0;
 	
@@ -18,7 +18,7 @@ this.config = new function()
 	var dispatchEvent = function(eventType)
 	{
 		var event = $.Event(eventType);
-		$(config).triggerHandler(event);
+		$(configRef).triggerHandler(event);
 	}
 	
 	this.load = function(file)
