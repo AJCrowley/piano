@@ -1,5 +1,9 @@
 {
 	"name": "piano-demo",
+	"subdomain": "ajcrowley.piano",
+	"scripts": {
+		"start": "server.js"
+	},
 	"config": {
 		"webport": 80,
 		"commport": 8080
@@ -7,11 +11,7 @@
 	"dependencies": {
 		"socket.io": "~0.9.6"
 	},
-	"version": "0.0.1-8",
-	"scripts": {
-		"start": "server.js"
-	},
-	"subdomain": "ajcrowley.piano",
+	"version": "0.0.1-13",
 	"engines": {
 		"node": "0.8.x"
 	}

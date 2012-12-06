@@ -9,7 +9,7 @@ var httpServer = require("http").createServer
 		var file = (request.url == "/") ? "index.html" : request.url;
 		fs.readFile
 		(
-			__dirname + "\\client_files\\" + file,
+			__dirname + "/client_files/" + file,
 			function(error, data)
 			{
 				if(error)
