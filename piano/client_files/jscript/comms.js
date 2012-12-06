@@ -23,7 +23,7 @@ var comms = new function()
 			{
 				if(data.instanceID != config.instanceID)
 				{
-					$("div#comms").prepend("note received: " + data.instanceID + "::" + data.note + "<br />");
+					$("div#comms").prepend("note received: " + data.instanceID + "::" + data.note.split("#")[1] + "<br />");
 					$(data.note).triggerHandler("network");
 				}
 			}
@@ -44,6 +44,6 @@ var comms = new function()
 	this.sendNote = function(note)
 	{
 		this.socket.emit("playNote", {instanceID: config.instanceID, note: note});
-		$("div#comms").prepend("note send: " + note + "<br />");
+		$("div#comms").prepend("note send: " + note.split("#")[1] + "<br />");
 	}
 }
