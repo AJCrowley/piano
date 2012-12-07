@@ -28,6 +28,14 @@ body
 	outline: none !important;
 }
 
+div#content
+{
+	position: relative;
+	height: 100%;
+	width: 860px;
+	margin: 0px auto;
+}
+
 div#loading
 {
 	position: absolute;
@@ -82,7 +90,7 @@ div#comms
 	position: absolute;
 	width: 820px;
 	background-color: rgba(0, 0, 0, 0.7);
-	top: 260px;
+	top: 290px;
 	bottom: 20px;
 	padding: 20px;
 	color: rgb(0, 200, 0);

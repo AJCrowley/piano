@@ -60,6 +60,54 @@ var piano = io.sockets.on
 				piano.emit("serverNote", {instanceID: data.instanceID, note: data.note});
 			}
 		);
+		socket.on
+		(
+			"storeTrack",
+			function(data)
+			{
+				// store track in redis, ideally store hashes in list, but redis doesn't appear to support this, so let's do it the easy way
+				client.hset("recordedTrack", data.instanceID, JSON.stringify(data.track));
+				piano.emit("recordedTrackAvailable", {instanceID: data.instanceID});
+				/*client.hget("recordedTrack", data.instanceID, function(err, obj)
+				{
+					if(err)
+					{
+						console.log(err);
+					}
+					else
+					{
+						console.log(obj);
+					}
+				});*/
+			}
+		);
+		// request for recorded track received
+		socket.on
+		(
+			"getRecoredTrack",
+			function(data)
+			{
+				console.log("request received for recorded track");
+				// get from redis
+				client.hget
+				(
+					"recordedTrack",
+					data.instanceID,
+					function(err, track)
+					{
+						if(err)
+						{
+							console.log(err);
+						}
+						else
+						{
+							// send back notification
+							socket.emit("recordedTrackTransfer", {track: JSON.parse(track)});
+						}
+					}
+				);
+			}
+		);
 		// oh hi, let's generate a new session ID and send it your way
 		client.incr
 		(

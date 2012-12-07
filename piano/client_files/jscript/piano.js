@@ -1,10 +1,10 @@
 var Piano = function()
 {
-	// keep reference to self
-	var pianoRef = this;
-
-	// store notes in an array
-	this.notes = {};
+	var pianoRef = this; // keep reference to self
+ 	this.recording = false; // are we recording?
+ 	var recordStartTime = 0; // store start time for recording purposes
+ 	this.recordedTrack = []; // empty array for recording
+	this.notes = {}; // store notes in an array
 
 	this.keyEvent = function(event)
 	{
@@ -68,13 +68,26 @@ var Piano = function()
 				{
 					case "pressed":
 					case "network":
+						if(pianoRef.recording) // are we recording?
+						{
+							// store recorded note
+							pianoRef.recordedTrack.push
+							({
+								"note": this.id,
+								"time": new Date().getTime() - recordStartTime
+							});
+						}
+						// is this a network event?
 						if(event.type != "network")
 						{
+							// nope, send it to the server
 							comms.sendNote(this.localName + "#" + this.id);
 						}
 						else
 						{
+							// yes, no need to resend
 							var key = this;
+							// release key after 300ms
 							setTimeout
 							(
 								function()
@@ -86,7 +99,7 @@ var Piano = function()
 						}
 						$(this).addClass("pressed");
 						// clone audio object to container
-						$(this).append($(pianoRef.notes[$(this).attr("id")][0]).clone());
+						$(this).append($(pianoRef.notes[this.id][0]).clone());
 						// get reference to cloned audio
 						var audio = $(this).children("audio")[$(this).children("audio").length - 1];
 						// listen for finished playing
@@ -109,6 +122,70 @@ var Piano = function()
 			}
 		)
 		$(document).on("keydown keyup", this.keyEvent);
+		$("a#rec").click
+		(
+			function()
+			{
+				$(this).toggleClass("on");
+				pianoRef.toggleRecord();
+			}
+		);
+		$("a#play").click
+		(
+			function()
+			{
+				// only commence playback if we have the on class
+				if($(this).hasClass("on"))
+				{
+					pianoRef.playback()
+				}
+			}
+		);
+	}
+
+	this.toggleRecord = function()
+	{
+		// invert recording state
+		this.recording = !this.recording;
+		if(this.recording)
+		{
+			// empty array for recording
+			this.recordedTrack = [];
+			this.recordedTrackAvailable(false);
+			// initialize start time
+			recordStartTime = new Date().getTime();
+		}
+		else
+		{
+			this.recordedTrackAvailable(true);
+			comms.sendTrack(pianoRef.recordedTrack);
+		}
+	}
+
+	this.recordedTrackAvailable = function(available)
+	{
+		available ? $("a#play").addClass("on") : $("a#play").removeClass("on");
+	}
+
+	this.playback = function()
+	{
+		// loop through recordedTrack
+		$.each
+		(
+			pianoRef.recordedTrack,
+			function(index, item)
+			{
+				setTimeout
+				(
+					function()
+					{
+						// use network event so release is automatically handled
+						$("#" + item.note).triggerHandler("network");
+					},
+					item.time
+				);
+			}
+		);
 	}
 
 	// array of chars which differ between keyCode and charCode

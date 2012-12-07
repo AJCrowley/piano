@@ -1,10 +1,8 @@
 div.piano
 {
 	border-top: 2px solid rgb(33, 33, 33);
-	width: 860px;
 	height: 240px;
-	margin: 0px auto;
-	padding-top: 10px;
+	padding-top: 40px;
 	border-radius: 0px 0px 8px 8px;
 	background: rgb(0, 0, 0);
 	background: -webkit-linear-gradient(-50deg, rgb(0, 0, 0), rgb(50, 50, 50), rgb(0, 0, 0), rgb(100, 100, 100), rgb(50, 50, 50) 75%);
@@ -12,6 +10,53 @@ div.piano
 	background: -ms-linear-gradient(-50deg, rgb(0, 0, 0), rgb(50, 50, 50), rgb(0, 0, 0), rgb(100, 100, 100), rgb(50, 50, 50) 75%);
 	background: -o-linear-gradient(-50deg, rgb(0, 0, 0), rgb(50, 50, 50), rgb(0, 0, 0), rgb(100, 100, 100), rgb(50, 50, 50) 75%);
 	background: linear-gradient(-50deg, rgb(0, 0, 0), rgb(50, 50, 50), rgb(0, 0, 0), rgb(100, 100, 100), rgb(50, 50, 50) 75%);
+}
+
+a.button
+{
+	display: block;
+	text-decoration: none;
+	position: absolute;
+	width: 90px;
+	height: 28px;
+	border: 2px rgb(0, 0, 0) solid;
+	top: 10px;
+	right: 10px;
+	border-radius: 6px;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, rgb(100, 100, 100)), color-stop(1, rgb(23, 23, 23)) );
+	background:-moz-linear-gradient( center top, rgb(100, 100, 100) 5%, rgb(23, 23, 23) 100% );
+	background-color: rgb(100, 100, 100);
+	color: rgb(158, 158, 158);
+}
+
+a.button:nth-child(2)
+{
+	right: 110px;
+}
+
+a.button div.label
+{
+	width: 72px;
+	text-align: center;
+	margin-top: 7px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+div.led
+{
+	float: left;
+	margin: 9px;
+    width: 12px;
+    height: 12px;
+    background-color: rgb(200, 0, 0);
+    border-radius: 50%;
+    box-shadow: rgb(0, 0, 0) 0 -1px 7px 1px, inset rgb(60, 0, 0) 0 -1px 9px;
+}
+
+a.button.on div.led
+{
+	box-shadow: rgb(0, 0, 0) 0 -1px 7px 1px, inset rgb(160, 0, 0) 0 -1px 9px, rgb(200, 0, 0) 0 2px 12px;
 }
 
 ul#piano
