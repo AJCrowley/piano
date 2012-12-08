@@ -6,6 +6,10 @@ var Piano = function()
  	this.recordedTrack = []; // empty array for recording
 	this.notes = {}; // store notes in an array
 
+	// event constants
+	this.EVENT_PROGRESS = "sampleLoadProgress";
+	this.EVENT_COMPLETE = "sampleLoadComplete";
+
 	this.keyEvent = function(event)
 	{
 		// if char is one of our list at the bottom
@@ -31,6 +35,9 @@ var Piano = function()
 
 	this.init = function()
 	{
+		// how many samples to load?
+		var soundsToLoad = $.map(config.settings.keymap, function(item, index) { return index; }).length;
+		var soundsLoaded = 0;
 		// display keys
 		$.each
 		(
@@ -41,6 +48,31 @@ var Piano = function()
 				$(value).html(key);
 				// create audio element and add to notes object
 				pianoRef.notes[$(value).attr("id")] = $("<audio>", {preload: "auto"}).append($("<source>", {src: "sounds/" + $(value).attr("id") + ".ogg", type: "audio/ogg"})).append($("<source>", {src: "sounds/" + $(value).attr("id") + ".mp3", type: "audio/mpeg"}));
+				pianoRef.notes[$(value).attr("id")].bind
+				(
+					"canplaythrough",
+					function()
+					{
+						var eventType = "";
+						// increment sounds loaded
+						soundsLoaded++;
+						// is that all of them?
+						if(soundsLoaded == soundsToLoad)
+						{
+							// dispatch complete event
+							eventType = pianoRef.EVENT_COMPLETE;
+						}
+						else
+						{
+							// nope, dispatch progress event
+							eventType = pianoRef.EVENT_PROGRESS;
+						}
+						var eventObj = $.Event(eventType);
+							// attach progress to event object
+						eventObj.progress = (100 / soundsToLoad) * soundsLoaded;
+						$(pianoRef).triggerHandler(eventObj);
+					}
+				);
 			}
 		);
 		// assign click to keys

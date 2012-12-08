@@ -22,9 +22,9 @@ $(document).ready
 						comms.init(config.host + ":" + config.settings.network.socketPort);
 					}
 				);
-				$(loader).bind
+				$(piano).bind
 				(
-					loader.EVENT_PROGRESS,
+					piano.EVENT_PROGRESS,
 					function(event)
 					{
 						// update progress text and bar
@@ -38,16 +38,17 @@ $(document).ready
 					}
 				).bind
 				(
-					loader.EVENT_COMPLETE,
+					piano.EVENT_COMPLETE,
 					function(event)
 					{
 						// hide loading overlay
 						$("div#loading").fadeOut("slow");
-						piano.init();
 					}
 				);
+				// initialize piano
+				piano.init();
 				// preload soundfiles so they're in cache
-				loader.load(config.settings.sounds.files);
+				//loader.load(config.settings.sounds.files);
 			}
 		);
 		config.load("conf/config.json");
