@@ -1,1 +1,1 @@
-socket.io/node/redis demo for GoInstant
+socket.io/node/redis demo
