@@ -1,5 +1,5 @@
-PanelSlider.js
-==============
+Node.js Networked Piano
+=======================
 A simple demo for node.js, socket.io, and redis.
 
 CSS3 drawn piano keyboard (no images used).
